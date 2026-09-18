@@ -1,0 +1,21 @@
+{
+  "name": "share-types",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "share-types/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/share-types",
+        "main": "share-types/src/index.ts",
+        "tsConfig": "share-types/tsconfig.lib.json",
+        "assets": ["share-types/*.md"],
+        "format": ["cjs"],
+        "generatePackageJson": true
+      }
+    }
+  }
+}
