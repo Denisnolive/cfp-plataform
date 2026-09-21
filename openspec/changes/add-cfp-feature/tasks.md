@@ -2,15 +2,15 @@
 
 ## 1. Setup e Dependências Compartilhadas
 
-- [ ] 1.1 Instalar as dependências `class-validator` e `class-transformer` no monorepo e verificar instalação bem-sucedida via `npm list class-validator class-transformer`
-- [ ] 1.2 Validar a integridade do contrato `SpeakerDTO` exportado por `@cfp-platform/share-types` e verificar a resolução correta dos caminhos no TypeScript
+- [x] 1.1 Instalar as dependências `class-validator` e `class-transformer` no monorepo e verificar instalação bem-sucedida via `npm list class-validator class-transformer`
+- [x] 1.2 Validar a integridade do contrato `SpeakerDTO` exportado por `@cfp-platform/share-types` e verificar a resolução correta dos caminhos no TypeScript
 
 ## 2. Backend (NestJS em `apps/api`)
 
-- [ ] 2.1 Criar o DTO de submissão de CFP (`CreateSpeakerDto`) implementando o contrato `SpeakerDTO` com decoradores de validação estrita (`@IsNotEmpty`, `@IsString`, `@IsEmail`, `@IsBoolean`) e verificar ausência de erros de compilação
-- [ ] 2.2 Implementar `CfpService` e `CfpController` com endpoint `POST /api/cfp`, consumindo o DTO com `@Body()` e aplicando `ValidationPipe` com `whitelist: true` e `forbidNonWhitelisted: true`
-- [ ] 2.3 Configurar e registrar `CfpModule` no `AppModule` e verificar o build do backend através do comando `nx build api`
-- [ ] 2.4 Criar testes unitários com Jest para o controller/validação do CFP em `apps/api`, assegurando que payloads inválidos (campos vazios, e-mail malformatado ou campos extras) sejam rejeitados com HTTP 400 Bad Request, e verificar execução com `nx test api`
+- [x] 2.1 Criar o DTO de submissão de CFP (`CreateSpeakerDto`) implementando o contrato `SpeakerDTO` com decoradores de validação estrita (`@IsNotEmpty`, `@IsString`, `@IsEmail`, `@IsBoolean`) e verificar ausência de erros de compilação
+- [x] 2.2 Implementar `CfpService` e `CfpController` com endpoint `POST /api/cfp`, consumindo o DTO com `@Body()` e aplicando `ValidationPipe` com `whitelist: true` e `forbidNonWhitelisted: true`
+- [x] 2.3 Configurar e registrar `CfpModule` no `AppModule` e verificar o build do backend através do comando `nx build api`
+- [x] 2.4 Criar testes unitários com Jest para o controller/validação do CFP em `apps/api`, assegurando que payloads inválidos (campos vazios, e-mail malformatado ou campos extras) sejam rejeitados com HTTP 400 Bad Request, e verificar execução com `nx test api`
 
 ## 3. Frontend (Angular 21 em `apps/frontend`)
 
