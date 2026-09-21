@@ -1,0 +1,122 @@
+<div class="cfp-container">
+  <div class="cfp-card">
+    <header class="cfp-header">
+      <h2>Submissão de Palestra (CFP)</h2>
+      <p>Preencha os dados abaixo para submeter sua proposta de palestra.</p>
+    </header>
+
+    @if (feedbackMessage()) {
+      <div
+        id="submission-feedback"
+        role="alert"
+        aria-live="polite"
+        [class]="'feedback-message ' + submissionStatus()"
+      >
+        {{ feedbackMessage() }}
+      </div>
+    }
+
+    <form (submit)="onSubmit($event)" novalidate class="cfp-form">
+      <div class="form-group">
+        <label for="speaker-name">
+          Nome do Palestrante <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="speaker-name"
+          name="name"
+          type="text"
+          [value]="name()"
+          (input)="name.set($any($event.target).value)"
+          (blur)="nameTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="nameError() ? 'true' : 'false'"
+          [attr.aria-describedby]="nameError() ? 'name-error' : null"
+          placeholder="Ex: Maria Silva"
+        />
+        @if (nameError()) {
+          <span id="name-error" class="error-text" role="alert">
+            {{ nameError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="speaker-email">
+          E-mail <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="speaker-email"
+          name="email"
+          type="email"
+          [value]="email()"
+          (input)="email.set($any($event.target).value)"
+          (blur)="emailTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="emailError() ? 'true' : 'false'"
+          [attr.aria-describedby]="emailError() ? 'email-error' : null"
+          placeholder="Ex: maria.silva@exemplo.com"
+        />
+        @if (emailError()) {
+          <span id="email-error" class="error-text" role="alert">
+            {{ emailError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="speaker-talk-title">
+          Título da Palestra <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="speaker-talk-title"
+          name="talkTitle"
+          type="text"
+          [value]="talkTitle()"
+          (input)="talkTitle.set($any($event.target).value)"
+          (blur)="talkTitleTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="talkTitleError() ? 'true' : 'false'"
+          [attr.aria-describedby]="talkTitleError() ? 'talk-title-error' : null"
+          placeholder="Ex: Arquitetura Moderna com Angular Signals"
+        />
+        @if (talkTitleError()) {
+          <span id="talk-title-error" class="error-text" role="alert">
+            {{ talkTitleError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label for="speaker-is-gde" class="checkbox-label">
+          <input
+            id="speaker-is-gde"
+            name="isGDE"
+            type="checkbox"
+            [checked]="isGDE()"
+            (change)="isGDE.set($any($event.target).checked)"
+          />
+          É Google Developer Expert (GDE)?
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          id="btn-submit-cfp"
+          class="btn-submit"
+          [disabled]="!canSubmit()"
+          [attr.aria-disabled]="!canSubmit()"
+        >
+          @if (isSubmitting()) {
+            <span>Enviando proposta...</span>
+          } @else {
+            <span>Submeter Proposta</span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
