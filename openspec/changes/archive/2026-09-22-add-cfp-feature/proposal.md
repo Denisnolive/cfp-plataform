@@ -27,10 +27,12 @@ A plataforma necessita de um canal digital para que palestrantes possam submeter
 ## Capabilities
 
 ### New Capabilities
+
 - `cfp-submission`: Submissão de propostas de palestras por palestrantes, com validação de payload estrita no backend e interface acessível orientada a Signals no frontend.
 
 ### Modified Capabilities
-*(Nenhuma capacidade existente alterada)*
+
+Nenhuma capacidade existente alterada.
 
 ## Impact
 
