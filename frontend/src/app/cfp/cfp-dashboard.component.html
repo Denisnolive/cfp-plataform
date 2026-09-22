@@ -1,0 +1,82 @@
+<div class="cfp-container">
+  <div class="cfp-card dashboard-card">
+    <header class="cfp-header dashboard-header">
+      <div class="header-titles">
+        <h2>Painel de Palestras Submetidas (CFP)</h2>
+        <p>Acompanhe todas as propostas de palestras submetidas na plataforma.</p>
+      </div>
+      <div class="header-actions">
+        <a routerLink="/cfp" id="btn-new-submission" class="btn-secondary">
+          + Nova Submissão
+        </a>
+      </div>
+    </header>
+
+    @if (errorMessage()) {
+      <div
+        id="dashboard-error"
+        role="alert"
+        aria-live="polite"
+        class="feedback-message error"
+      >
+        {{ errorMessage() }}
+      </div>
+    }
+
+    @if (isLoading()) {
+      <div class="loading-state" aria-live="polite" role="status">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <span>Carregando propostas de palestras...</span>
+      </div>
+    } @else {
+      @if (proposals().length === 0) {
+        <div id="empty-state" class="empty-state" role="status">
+          <div class="empty-icon" aria-hidden="true">📋</div>
+          <h3 class="empty-title">Nenhuma palestra submetida até o momento</h3>
+          <p class="empty-desc">
+            Assim que palestrantes submeterem suas propostas, elas serão listadas aqui.
+          </p>
+          <a routerLink="/cfp" class="btn-submit btn-empty-action">
+            Submeter Primeira Palestra
+          </a>
+        </div>
+      } @else {
+        <div class="table-responsive">
+          <table class="cfp-table" aria-label="Lista de Palestras Submetidas">
+            <caption class="sr-only">
+              Tabela de propostas de palestras submetidas com título, palestrante, e-mail e status GDE
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Título da Palestra</th>
+                <th scope="col">Palestrante</th>
+                <th scope="col">E-mail</th>
+                <th scope="col" class="text-center">GDE</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (proposal of proposals(); track proposal.id) {
+                <tr>
+                  <td class="font-semibold text-primary-cell">
+                    {{ proposal.talkTitle }}
+                  </td>
+                  <td>{{ proposal.name }}</td>
+                  <td class="text-muted">{{ proposal.email }}</td>
+                  <td class="text-center">
+                    @if (proposal.isGDE) {
+                      <span class="badge badge-gde" aria-label="Google Developer Expert">
+                        GDE
+                      </span>
+                    } @else {
+                      <span class="text-muted" aria-label="Não é GDE">—</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    }
+  </div>
+</div>

@@ -1,11 +1,12 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { CfpService, CreateSpeakerPayload } from './cfp.service';
 
 @Component({
   selector: 'app-cfp-submission',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './cfp-submission.component.html',
   styleUrl: './cfp-submission.component.css',
 })

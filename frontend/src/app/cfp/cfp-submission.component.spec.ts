@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { vi } from 'vitest';
 import { of, throwError } from 'rxjs';
+import { provideRouter } from '@angular/router';
 import { SpeakerDTO } from '@cfp-platform/share-types';
 import { CfpSubmissionComponent } from './cfp-submission.component';
 import { CfpService } from './cfp.service';
@@ -17,7 +18,10 @@ describe('CfpSubmissionComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [CfpSubmissionComponent],
-      providers: [{ provide: CfpService, useValue: mockCfpService }],
+      providers: [
+        { provide: CfpService, useValue: mockCfpService },
+        provideRouter([]),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CfpSubmissionComponent);
@@ -198,6 +202,18 @@ describe('CfpSubmissionComponent', () => {
       expect(component.nameTouched()).toBe(true);
       expect(component.emailTouched()).toBe(true);
       expect(component.talkTitleTouched()).toBe(true);
+    });
+  });
+
+  describe('Navegação para o Dashboard', () => {
+    it('deve possuir links/botões configurados para navegação para a rota /dashboard', () => {
+      const headerDashboardBtn: HTMLElement = fixture.nativeElement.querySelector('#btn-header-dashboard');
+      expect(headerDashboardBtn).toBeTruthy();
+      expect(headerDashboardBtn.textContent).toContain('Ver Painel');
+
+      const navDashboardBtn: HTMLElement = fixture.nativeElement.querySelector('#btn-nav-dashboard');
+      expect(navDashboardBtn).toBeTruthy();
+      expect(navDashboardBtn.textContent).toContain('Ver Palestras Submetidas');
     });
   });
 });

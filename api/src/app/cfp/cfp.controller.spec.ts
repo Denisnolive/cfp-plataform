@@ -56,18 +56,32 @@ describe('CfpController', () => {
       expect(result.talkTitle).toBe('Mastering NestJS & Angular');
       expect(result.isGDE).toBe(false);
     });
+  });
 
-    it('should return all proposals from service', () => {
+  describe('findAll', () => {
+    it('should return empty array when no proposals exist', () => {
+      const result = controller.findAll();
+      expect(result).toBeDefined();
+      expect(Array.isArray(result)).toBe(true);
+      expect(result.length).toBe(0);
+    });
+
+    it('should return all submitted proposals matching SpeakerDTO contract', () => {
       const dto: CreateSpeakerDto = {
         name: 'John Doe',
         email: 'john@example.com',
         talkTitle: 'Signals in Practice',
         isGDE: true,
       };
-      controller.create(dto);
+      const created = controller.create(dto);
 
       const all = controller.findAll();
-      expect(all.length).toBeGreaterThanOrEqual(1);
+      expect(all.length).toBe(1);
+      expect(all[0]).toEqual(created);
+      expect(all[0].name).toBe('John Doe');
+      expect(all[0].email).toBe('john@example.com');
+      expect(all[0].talkTitle).toBe('Signals in Practice');
+      expect(all[0].isGDE).toBe(true);
     });
   });
 

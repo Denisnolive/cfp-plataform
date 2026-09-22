@@ -58,4 +58,37 @@ describe('CfpService', () => {
 
     expect(actualResponse).toEqual(mockResponse);
   });
+
+  it('should send GET request to /api/cfp and return proposals array', () => {
+    const mockProposals: SpeakerDTO[] = [
+      {
+        id: 'speaker-1',
+        name: 'Ada Lovelace',
+        email: 'ada@example.com',
+        talkTitle: 'The First Algorithm',
+        isGDE: true,
+      },
+      {
+        id: 'speaker-2',
+        name: 'Alan Turing',
+        email: 'alan@example.com',
+        talkTitle: 'Universal Computation',
+        isGDE: false,
+      },
+    ];
+
+    let actualProposals: SpeakerDTO[] | undefined;
+
+    service.getProposals().subscribe((res) => {
+      actualProposals = res;
+    });
+
+    const req = httpTesting.expectOne('/api/cfp');
+    expect(req.request.method).toBe('GET');
+
+    req.flush(mockProposals);
+
+    expect(actualProposals).toEqual(mockProposals);
+    expect(actualProposals?.length).toBe(2);
+  });
 });

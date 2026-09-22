@@ -19,4 +19,8 @@ export class CfpService {
   submit(proposal: CreateSpeakerPayload): Observable<SpeakerDTO> {
     return this.submitProposal(proposal);
   }
+
+  getProposals(): Observable<SpeakerDTO[]> {
+    return this.http.get<SpeakerDTO[]>(this.apiUrl);
+  }
 }

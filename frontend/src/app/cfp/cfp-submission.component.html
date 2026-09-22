@@ -1,8 +1,13 @@
 <div class="cfp-container">
   <div class="cfp-card">
-    <header class="cfp-header">
-      <h2>Submissão de Palestra (CFP)</h2>
-      <p>Preencha os dados abaixo para submeter sua proposta de palestra.</p>
+    <header class="cfp-header form-header-with-actions">
+      <div class="header-titles">
+        <h2>Submissão de Palestra (CFP)</h2>
+        <p>Preencha os dados abaixo para submeter sua proposta de palestra.</p>
+      </div>
+      <a routerLink="/dashboard" id="btn-header-dashboard" class="btn-secondary">
+        Ver Painel
+      </a>
     </header>
 
     @if (feedbackMessage()) {
@@ -116,6 +121,9 @@
             <span>Submeter Proposta</span>
           }
         </button>
+        <a routerLink="/dashboard" id="btn-nav-dashboard" class="btn-secondary btn-nav-dashboard">
+          Ver Palestras Submetidas
+        </a>
       </div>
     </form>
   </div>
