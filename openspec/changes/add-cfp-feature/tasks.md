@@ -2,7 +2,7 @@
 
 ## 1. Setup e Dependências Compartilhadas
 
-- [ ] 1.1 Instalar as dependências `class-validator` e `class-transformer` no monorepo e verificar instalação bem-sucedida via `npm list class-validator class-transformer`
+- [x] 1.1 Instalar as dependências `class-validator` e `class-transformer` no monorepo e verificar instalação bem-sucedida via `npm list class-validator class-transformer`
 - [x] 1.2 Validar a integridade do contrato `SpeakerDTO` exportado por `@cfp-platform/share-types` e verificar a resolução correta dos caminhos no TypeScript
 
 ## 2. Backend (NestJS em `apps/api`)
