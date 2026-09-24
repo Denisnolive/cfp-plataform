@@ -1,0 +1,155 @@
+<div class="event-container">
+  <div class="event-card">
+    <header class="event-header">
+      <h2>Cadastro de Eventos</h2>
+      <p>Preencha os campos abaixo para cadastrar um novo evento.</p>
+    </header>
+
+    @if (feedbackMessage()) {
+      <div
+        id="submission-feedback"
+        role="alert"
+        aria-live="polite"
+        [class]="'feedback-message ' + submissionStatus()"
+      >
+        {{ feedbackMessage() }}
+      </div>
+    }
+
+    <form (submit)="onSubmit($event)" novalidate class="event-form">
+      <div class="form-group">
+        <label for="name">
+          Nome do Evento <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          class="event-name"
+          [value]="name()"
+          (input)="name.set($any($event.target).value)"
+          (blur)="nameTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="nameError() ? 'true' : 'false'"
+          [attr.aria-describedby]="nameError() ? 'name-error' : null"
+          placeholder="Ex: Workshop de Testes E2E"
+        />
+        @if (nameError()) {
+          <span
+            id="name-error"
+            class="error-name error-text error-message"
+            data-error="name"
+            role="alert"
+          >
+            {{ nameError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="address">
+          Endereço <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="address"
+          name="address"
+          type="text"
+          class="event-address"
+          [value]="address()"
+          (input)="address.set($any($event.target).value)"
+          (blur)="addressTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="addressError() ? 'true' : 'false'"
+          [attr.aria-describedby]="addressError() ? 'address-error' : null"
+          placeholder="Ex: Av. Paulista, 1000 - São Paulo, SP"
+        />
+        @if (addressError()) {
+          <span
+            id="address-error"
+            class="error-address error-text error-message"
+            data-error="address"
+            role="alert"
+          >
+            {{ addressError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="capacity">
+          Capacidade <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="capacity"
+          name="capacity"
+          type="number"
+          class="event-capacity"
+          [value]="capacity()"
+          (input)="capacity.set($any($event.target).value)"
+          (blur)="capacityTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="capacityError() ? 'true' : 'false'"
+          [attr.aria-describedby]="capacityError() ? 'capacity-error' : null"
+          placeholder="Ex: 100"
+        />
+        @if (capacityError()) {
+          <span
+            id="capacity-error"
+            class="error-capacity error-text error-message"
+            data-error="capacity"
+            role="alert"
+          >
+            {{ capacityError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="date">
+          Data <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="date"
+          name="date"
+          type="date"
+          class="event-date"
+          [value]="date()"
+          (input)="date.set($any($event.target).value)"
+          (blur)="dateTouched.set(true)"
+          required
+          aria-required="true"
+          [attr.aria-invalid]="dateError() ? 'true' : 'false'"
+          [attr.aria-describedby]="dateError() ? 'date-error' : null"
+        />
+        @if (dateError()) {
+          <span
+            id="date-error"
+            class="error-date error-text error-message"
+            data-error="date"
+            role="alert"
+          >
+            {{ dateError() }}
+          </span>
+        }
+      </div>
+
+      <div class="form-actions">
+        <button
+          type="submit"
+          id="btn-submit"
+          class="btn-submit"
+          [disabled]="isSubmitting()"
+        >
+          @if (isSubmitting()) {
+            <span>Salvando evento...</span>
+          } @else {
+            <span>Salvar Evento</span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
